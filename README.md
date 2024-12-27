@@ -80,10 +80,6 @@ npm run dev
 ### 4. Uygulamaları Tarayıcıda Görüntüleme
 Tarayıcınızda aşağıdaki URL'leri ziyaret ederek uygulamaları görüntüleyebilirsiniz:
 
-- Host Uygulaması: [http://localhost:3000](http://localhost:3000)
-- Product Uygulaması: [http://localhost:3001](http://localhost:3001)
-- Basket Uygulaması: [http://localhost:3002](http://localhost:3002)
-
-### Projeyi GitHub'dan Alıp Kurma
-```bash
-git clone https://github.com/safasaribek/task.git
+- Host Uygulaması: [http://localhost:3001](http://localhost:3000)
+- Product Uygulaması: [http://localhost:3002](http://localhost:3001)
+- Basket Uygulaması: [http://localhost:3003](http://localhost:3002)
