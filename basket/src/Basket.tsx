@@ -2,7 +2,31 @@ import React from 'react';
 import { Drawer, List, Card, Button, InputNumber, Row, Col } from 'antd';
 import { DeleteOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
-const Basket = ({ isVisible, onClose, selectedProducts, onQuantityChange, onRemoveProduct }) => {
+// Ürün tipi
+interface Product {
+    id: number;
+    title: string;
+    price: number;
+    quantity?: number;
+    image: string;
+}
+
+// Basket component props tipi
+interface BasketProps {
+    isVisible: boolean;
+    onClose: () => void;
+    selectedProducts: Product[];
+    onQuantityChange: (productId: number, value: number) => void;
+    onRemoveProduct: (productId: number) => void;
+}
+
+const Basket: React.FC<BasketProps> = ({
+                                           isVisible,
+                                           onClose,
+                                           selectedProducts,
+                                           onQuantityChange,
+                                           onRemoveProduct,
+                                       }) => {
     const totalPrice = selectedProducts.reduce(
         (total, product) => total + product.price * (product.quantity || 1),
         0
@@ -26,7 +50,7 @@ const Basket = ({ isVisible, onClose, selectedProducts, onQuantityChange, onRemo
                     <List
                         dataSource={selectedProducts}
                         renderItem={(item) => (
-                            <List.Item>
+                            <List.Item key={item.id}>
                                 <Card
                                     style={{ width: '100%' }}
                                     cover={
@@ -44,11 +68,13 @@ const Basket = ({ isVisible, onClose, selectedProducts, onQuantityChange, onRemo
                                                 min={1}
                                                 max={99}
                                                 value={item.quantity || 1}
-                                                onChange={(value) => onQuantityChange(item.id, value)}
+                                                onChange={(value) => onQuantityChange(item.id, value as number)}
                                             />
                                         </Col>
                                         <Col span={6} style={{ textAlign: 'right' }}>
-                                            <p style={{ fontWeight: 'bold' }}>{(item.price * (item.quantity || 1)).toFixed(2)} $</p>
+                                            <p style={{ fontWeight: 'bold' }}>
+                                                {(item.price * (item.quantity || 1)).toFixed(2)} $
+                                            </p>
                                         </Col>
                                         <Col span={6} style={{ textAlign: 'right' }}>
                                             <Button

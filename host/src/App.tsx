@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import './App.css';
-import ProductList from 'products/ProductList';
-import Basket from 'basket/Basket';
+
+const ProductList = React.lazy(() => import('products/ProductList'));
+const Basket = React.lazy(() => import('basket/Basket'));
+
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Button, Badge } from 'antd';
 
-function App() {
-    const [selectedProducts, setSelectedProducts] = useState([]);
-    const [isBasketVisible, setIsBasketVisible] = useState(false);
+// Product type definition
+interface Product {
+    id: number;
+    name: string;
+    price: number;
+    quantity?: number;
+}
 
-    const handleAddToBasket = (product) => {
+function App() {
+    const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
+    const [isBasketVisible, setIsBasketVisible] = useState<boolean>(false);
+
+    // Add product to the basket
+    const handleAddToBasket = (product: Product) => {
         setSelectedProducts((prev) => {
             const existingProduct = prev.find((p) => p.id === product.id);
             if (existingProduct) {
@@ -21,7 +32,8 @@ function App() {
         });
     };
 
-    const handleQuantityChange = (id, quantity) => {
+    // Update product quantity
+    const handleQuantityChange = (id: number, quantity: number) => {
         setSelectedProducts((prev) =>
             prev.map((product) =>
                 product.id === id ? { ...product, quantity } : product
@@ -29,10 +41,12 @@ function App() {
         );
     };
 
-    const handleRemoveProduct = (id) => {
+    // Remove product from the basket
+    const handleRemoveProduct = (id: number) => {
         setSelectedProducts((prev) => prev.filter((product) => product.id !== id));
     };
 
+    // Calculate total number of items in the basket
     const totalItems = selectedProducts.reduce(
         (total, product) => total + (product.quantity || 1),
         0
@@ -40,13 +54,16 @@ function App() {
 
     return (
         <div className="container">
-            <div className="header" style={{
-                padding: '0 20px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '16px',
-            }}>
+            <div
+                className="header"
+                style={{
+                    padding: '0 20px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '16px',
+                }}
+            >
                 <h1 className="header-title">Host Application</h1>
                 <Badge count={totalItems} offset={[2, -2]} showZero>
                     <Button
@@ -68,7 +85,6 @@ function App() {
             />
         </div>
     );
-
 }
 
 export default App;
