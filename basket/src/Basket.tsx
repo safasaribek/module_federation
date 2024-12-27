@@ -2,7 +2,6 @@ import React from 'react';
 import { Drawer, List, Card, Button, InputNumber, Row, Col } from 'antd';
 import { DeleteOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
-// Ürün tipi
 interface Product {
     id: number;
     title: string;
@@ -11,7 +10,6 @@ interface Product {
     image: string;
 }
 
-// Basket component props tipi
 interface BasketProps {
     isVisible: boolean;
     onClose: () => void;

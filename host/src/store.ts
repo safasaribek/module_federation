@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { productsApi } from './api/productsApi'; // RTK Query API'si import edin
+import { productsApi } from './api/productsApi';
 
 export const store = configureStore({
     reducer: {
-        [productsApi.reducerPath]: productsApi.reducer, // RTK Query reducer'ı ekleyin
+        [productsApi.reducerPath]: productsApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(productsApi.middleware), // API middleware'ini ekleyin
+        getDefaultMiddleware().concat(productsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -7,7 +7,6 @@ const Basket = React.lazy(() => import('basket/Basket'));
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Button, Badge } from 'antd';
 
-// Product type definition
 interface Product {
     id: number;
     name: string;
@@ -19,7 +18,6 @@ function App() {
     const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
     const [isBasketVisible, setIsBasketVisible] = useState<boolean>(false);
 
-    // Add product to the basket
     const handleAddToBasket = (product: Product) => {
         setSelectedProducts((prev) => {
             const existingProduct = prev.find((p) => p.id === product.id);
@@ -32,7 +30,6 @@ function App() {
         });
     };
 
-    // Update product quantity
     const handleQuantityChange = (id: number, quantity: number) => {
         setSelectedProducts((prev) =>
             prev.map((product) =>
@@ -41,12 +38,10 @@ function App() {
         );
     };
 
-    // Remove product from the basket
     const handleRemoveProduct = (id: number) => {
         setSelectedProducts((prev) => prev.filter((product) => product.id !== id));
     };
 
-    // Calculate total number of items in the basket
     const totalItems = selectedProducts.reduce(
         (total, product) => total + (product.quantity || 1),
         0
