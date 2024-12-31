@@ -7,8 +7,8 @@ Bu proje, Webpack Module Federation kullanarak oluşturulmuş bir mikro uygulama
 ### 1. Projeyi GitHub'dan Klonlama
 Projeyi GitHub'dan klonlayın:
 ```bash
-git clone https://github.com/safasaribek/task.git
-cd task
+git clone https://github.com/safasaribek/module_federation.git
+cd module_federation
 ```
 
 ### 2. Bağımlılıkları Kurma
